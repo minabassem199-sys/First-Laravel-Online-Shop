@@ -81,9 +81,17 @@
                 </tr>
             </tfoot>
         </table>
+        <form action="{{ route('orders.store') }}" method="POST">
+    @csrf
+    <input type="hidden" name="total" value="{{ $cartTotal }}">
+    <button type="submit" class="btn btn-success">
+        إتمام الطلب (Cash on Delivery)
+    </button>
+</form>
+
     @else
         <div class="empty-cart text-center">
-            <p>🛍️ Your cart is empty. <a href="{{ route('cart.show') }}" class="btn btn-primary btn-sm">Add products</a> to start shopping!</p>
+            <p>🛍️ Your cart is empty. <a href="{{ route('products.index') }}" class="btn btn-primary btn-sm">Add products</a> to start shopping!</p>
         </div>
     @endif
 </div>

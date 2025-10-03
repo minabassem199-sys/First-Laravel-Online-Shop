@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
@@ -34,7 +35,10 @@ Route::middleware('auth')->group(function(){
     Route::post('/cart/remove/{id}', [ProductsController::class, 'removeFromCart'])->name('cart.remove');
 });
 
-
+Route::middleware(['auth'])->group(function () {
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+    Route::get('/my-orders', [OrderController::class, 'myOrders'])->name('orders.my');
+});
 
 // صفحات الأدمن (تتطلب تسجيل دخول)
 Route::middleware(['auth', 'verified'])->group(function () {

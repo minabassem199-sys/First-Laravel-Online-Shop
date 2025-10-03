@@ -198,7 +198,12 @@ public function addToCart(Request $request)
 public function showCart()
 {
     $cart = session()->get('cart', []);
-    return view('products.cart', compact('cart'));
+    $cartTotal = 0;
+    foreach ($cart as $item) {
+        $cartTotal += $item['price'] * $item['quantity'];
+    }
+
+    return view('products.cart', compact('cart', 'cartTotal'));
 }
 
 /**
